@@ -1,0 +1,16 @@
+<% layout('/layouts/boilerplate') -%>
+<body>
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-8 offset-lg-4 offset-md-3 offset-sm-2 edit">
+            <h2 class="mb-4 text-center">Edit</h2>
+            <p>username: @<i><%= user.username %></i></p>
+            <form method="post" action="/todos/<%= todo._id %>?_method=PUT">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Todo</label>
+                    <input type="text" name="todo" class="form-control edit-inp" value="<%= todo.message %>">
+                </div>
+                <button class="btn btn-sm my-btn float-end">Update</button>
+            </form>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,105 @@
+body {
+    background-color: #EBE5C2;
+}
+
+.navbar {
+    background-color: #504B38;
+    min-height: 4rem;
+}
+
+.navbar-brand, .nav-link {
+    color: #F8F3D9 !important;
+}
+
+/* Login/ Signup/ Edit */
+
+.login, .signup, .edit {
+    padding: 2rem;
+    margin-top: 5rem;
+    /* margin-left: 2rem;
+    margin-right: 2rem; */
+    border-radius: 25px;
+    background-color: #B9B28A;
+    color: #504B38;
+}
+
+.login-inp, .signup-inp, .edit-inp {
+    background-color: #EBE5C2;
+    border: none;
+}
+
+.login-inp:focus, .signup-inp:focus, .edit-inp:focus {
+    background-color: #EBE5C2;
+    color: #504B38;
+} 
+
+.my-btn {
+    background-color: #504B38;
+    color: #F8F3D9;
+}
+
+.my-btn:hover {
+    background-color: #504B38 !important;
+    color: #F8F3D9 !important;
+}
+
+/* Todo */
+
+.todo-inp {
+    padding: 1.5rem;
+    border: none;
+    border-radius: 0;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    font-size: 1.3rem;
+    background-color: #F8F3D9;
+}
+
+.todo-inp:focus {
+    background-color: #F8F3D9;
+    color: #504B38;
+    border: none;
+    box-shadow: none;
+    outline: none;
+}
+
+.todo-btn {
+    border-radius: 0;
+    width: 4rem;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    font-size: 2rem;
+}
+
+.todos {
+    background-color: #F8F3D9;
+    border-radius: 25px;
+    padding: 2rem;
+}
+
+td, th {
+    background-color: #F8F3D9 !important;
+    color: #504B38 !important;
+}
+
+.action-btn {
+    display: flex;
+    font-size: 0.7rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    text-align: center;
+    justify-content: center;
+}
+
+.todo-msg {
+    margin-left: 2rem;
+    color: #504B38;
+}
+
+h2 {
+    color: #504B38;
+}
+
+.action {
+    display: flex;
+}

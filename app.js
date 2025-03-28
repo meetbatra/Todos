@@ -34,7 +34,7 @@ async function main() {
 const store = MongoStore.create({
     mongoUrl: dbUrl,
     crypto: {
-        secret: 'mysupersecretcode'
+        secret: process.env.SECRET
     },
     touchAfter: 24 * 3600
 });
@@ -45,7 +45,7 @@ store.on('error', (err) => {
 
 const sessionOptions = {
     store,
-    secret: 'mysupersecretcode',
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -123,12 +123,21 @@ app.get('/todos', isLoggedIn, async (req,res) => {
 });
 
 app.post('/todos', isLoggedIn, async(req,res) => {
-    let { todo } = req.body;
-    let newTodo = new Todo({ message: todo, userId: req.user._id});
-    await newTodo.save()
+    try{
+        let { todo } = req.body;
+        if(todo.length === 0){
+            req.flash('error','Please add something to your todo');
+            return res.redirect('/todos');
+        }
+        let newTodo = new Todo({ message: todo, userId: req.user._id});
+        await newTodo.save()
 
-    req.flash('success', 'Todo added!')
-    res.redirect('/todos')
+        req.flash('success', 'Todo added!')
+        res.redirect('/todos')
+    }catch(e){
+        req.flash('error', e.message);
+        res.redirect('/todos');
+    }
 });
 
 app.get('/todos/:id', isLoggedIn, async(req,res) => {
@@ -138,17 +147,31 @@ app.get('/todos/:id', isLoggedIn, async(req,res) => {
 });
 
 app.put('/todos/:id', isLoggedIn, isOwner, async(req,res) => {
-    let message = req.body.todo;
-    await Todo.findByIdAndUpdate(req.params.id, {message});
-    req.flash('success', 'Todo updated');
-    res.redirect('/todos');
+    try {
+        let message = req.body.todo;
+        if(message.length === 0){
+            req.flash('error','Please add something to your todo');
+            return res.redirect(`/todos/${req.params.id}`);
+        }
+        await Todo.findByIdAndUpdate(req.params.id, {message});
+        req.flash('success', 'Todo updated');
+        res.redirect('/todos');
+    }catch(e){
+        req.flash('error', e.message);
+        res.redirect(`/todos/${req.params.id}`);
+    }
 });
 
 app.delete('/todos/:id', isLoggedIn, isOwner, async(req,res) => {
-    let id = req.params.id;
-    await Todo.findByIdAndDelete(id);
-    req.flash('success', 'Todo deleted!');
-    res.redirect('/todos');
+    try{
+        let id = req.params.id;
+        await Todo.findByIdAndDelete(id);
+        req.flash('success', 'Todo deleted!');
+        res.redirect('/todos');
+    }catch(e){
+        req.flash('error', e.message);
+        res.redirect(`/todos/${req.params.id}`);
+    }
 });
 
 app.listen(8080, () => {

@@ -1,6 +1,6 @@
-# ✅ Personalized Todos
+# ✅ Todos
 
-**Personalized Todos** is a web-based todo list application that allows users to manage their tasks with a clean and user-friendly interface. The app supports user authentication, secure session management, and persistent storage using MongoDB Atlas.
+**Todos** is a web-based todo list application that allows users to manage their tasks with a clean and user-friendly interface. The app supports user authentication, secure session management, and persistent storage using MongoDB Atlas.
 
 ## ✨ Features
 
